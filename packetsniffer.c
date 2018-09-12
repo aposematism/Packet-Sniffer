@@ -317,11 +317,20 @@ int main(int argc, char * argv[]){
     exit(1);
   }
   //Main loop for this.
-  if(pcap_loop(handle, 100, packetHandler, NULL) < 0){
-    printf("Some error has occured while processing the packets!\n");
-    printf("%s\n", pcap_geterr(handle));
-    return 1;
-  }
+  if(argc == 3){
+        if(pcap_loop(handle, atoi(argv[2]), packetHandler, NULL) < 0){
+            printf("Some error has occured while processing the packets!\n");
+            printf("%s\n", pcap_geterr(handle));
+            return 1;
+        }
+    }
+   /** else{
+        if(pcap_loop(handle, 100, packetHandler, NULL) < 0){
+            printf("Some error has occured while processing the packets!\n");
+            printf("%s\n", pcap_geterr(handle));
+            return 1;
+        }
+    }  */
   printf("Packet Read complete.\n");
   return 0;
 }
